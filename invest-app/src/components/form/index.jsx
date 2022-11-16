@@ -3,10 +3,11 @@ import { Container } from "./style";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import api from "../../services/api";
 
 export const FormInvest = () => {
 	const formSchema = yup.object().shape({
-		ammount: yup
+		amount: yup
 			.number()
 			.required("Campo obrigatório!!")
 			.typeError("Apenas números"),
@@ -28,8 +29,13 @@ export const FormInvest = () => {
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(formSchema) });
 
-	const onSubmitData = (data) => {
-		console.log(data);
+	const onSubmitData = ({ amount, installments, mdr }) => {
+		const values = { amount, installments, mdr };
+
+		api
+			.post("/", values)
+			.then((response) => console.log(response.data))
+			.catch((error) => console.log(error));
 	};
 
 	return (
@@ -37,8 +43,8 @@ export const FormInvest = () => {
 			<Container onSubmit={handleSubmit(onSubmitData)}>
 				<BaseInput
 					register={register}
-					name="ammount"
-					id="ammount"
+					name="amount"
+					id="amount"
 					label="Informe o valor da venda *"
 					placeholder="Ex: 400"
 					prefix="R$"
