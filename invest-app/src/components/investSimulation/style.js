@@ -72,7 +72,7 @@ export const ContentResult = styled.div`
 	li {
 		color: var(--blue);
 		font-size: 0.9rem;
-		margin-bottom: 25px;
+		padding: 12px;
 		text-transform: capitalize;
 		font-style: italic;
 

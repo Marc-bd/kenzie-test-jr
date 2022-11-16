@@ -4,13 +4,19 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
+import { useDispatch } from "react-redux";
+import { addValuesThunk } from "../../store/modules/values/thunk";
+import { useState } from "react";
 
 export const FormInvest = () => {
+	const dispatch = useDispatch();
+
 	const formSchema = yup.object().shape({
 		amount: yup
 			.number()
-			.required("Campo obrigatório!!")
-			.typeError("Apenas números"),
+			.lessThan(1000, "Valor deve ser maior que 1000")
+			.max(100000000, "Valor deve ser menor que 100000000")
+			.required("Campo obrigatório!!"),
 		installments: yup
 			.number()
 			.required("Campo obrigatório!!")
@@ -34,10 +40,9 @@ export const FormInvest = () => {
 
 		api
 			.post("/", values)
-			.then((response) => console.log(response.data))
-			.catch((error) => console.log(error));
+			.then((response) => dispatch(addValuesThunk(response.data)));
 	};
-
+	console.log(errors);
 	return (
 		<>
 			<Container onSubmit={handleSubmit(onSubmitData)}>
@@ -48,7 +53,8 @@ export const FormInvest = () => {
 					label="Informe o valor da venda *"
 					placeholder="Ex: 400"
 					prefix="R$"
-					type="text"
+					type="number"
+					legend="De 1.000 até 1.000,000,00"
 					error={errors.ammount?.message}
 				/>
 				<BaseInput
