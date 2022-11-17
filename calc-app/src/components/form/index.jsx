@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import api from "../../services/api";
 import { useDispatch } from "react-redux";
 import { addValuesThunk } from "../../store/modules/values/thunk";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export const FormInvest = () => {
 	const dispatch = useDispatch();

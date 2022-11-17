@@ -1,5 +1,3 @@
-import GlobalStyle from "./styles/globalStyle";
-import { FormInvest } from "./components/form/index";
 import { InvestSimulator } from "./components/investSimulation";
 
 function App() {
