@@ -50,6 +50,10 @@ export const InputContainer = styled.div`
 		props.errors &&
 		css`
 			border-color: var(--red);
+
+			&:hover {
+				border-color: var(--red);
+			}
 		`}
 
 	&:hover {

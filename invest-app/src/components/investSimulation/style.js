@@ -37,7 +37,6 @@ export const ContentForm = styled.div`
 
 	@media (min-width: 1024px) {
 		width: 400px;
-		height: 475px;
 
 		h1 {
 			font-size: 1.5rem;
